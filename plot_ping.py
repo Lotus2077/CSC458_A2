@@ -64,7 +64,7 @@ plt.ylabel("RTT (ms)")
 plt.grid(True)
 
 if args.out:
-    print 'saving to', args.out
+    print('saving to', args.out)
     plt.savefig(args.out)
 else:
     plt.show()

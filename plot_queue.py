@@ -79,7 +79,7 @@ plt.grid(True)
 plt.xlabel("Seconds")
 
 if args.out:
-    print 'saving to', args.out
+    print('saving to', args.out)
     plt.savefig(args.out)
 else:
     plt.show()
