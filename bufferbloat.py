@@ -123,8 +123,10 @@ def start_iperf(net):
     # long lived TCP flow. You may need to redirect iperf's stdout to avoid blocking.
     client = net.get('h1')
     client.popen("iperf -c %s -t %s" % (h2.IP(), args.time))
+    print ("Client Established...")
 
 def start_webserver(net):
+    print ("Starting web server...")
     h1 = net.get('h1')
     proc = h1.popen("python http/webserver.py", shell=True)
     sleep(1)
@@ -141,11 +143,13 @@ def start_ping(net):
     # Note that if the command prints out a lot of text to stdout, it will block
     # until stdout is read. You can avoid this by runnning popen.communicate() or
     # redirecting stdout
+    print ("Starting Ping...")
     h1 = net.get('h1')
     h2 = net.get('h2')
     # popen = h1.popen("echo '' > %s/ping.txt"%(args.dir), shell=True)
     popen = h1.popen("ping -i 0.1 %s > %s/ping.txt" % (h2.IP(), args.dir), shell=True)
-    popen.communicate()
+    # popen.communicate()
+    print ("Ping Started...")
 
 def measure_fetch(h1, h2, net, command):
     tmp = []
