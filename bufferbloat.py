@@ -151,7 +151,7 @@ def start_ping(net):
     # popen.communicate()
     print ("Ping Started...")
 
-def measure_fetch(h1, h2, net, command):
+def measure_fetch(h2, command):
     tmp = []
     for _ in range(3):
         fetch_time, err = h2.popen(command, stdout=PIPE).communicate()
@@ -220,11 +220,13 @@ def bufferbloat():
     fetch_times = []
     client = net.get("h1")
     server = net.get("h2")
-    command = "curl -o /dev/null -s -w {} {}/http/index.html".format("%{time_total}", client.IP())
+    # command = "curl -o /dev/null -s -w {} {}/http/index.html".format("%{time_total}", client.IP())
+    command = "curl -o /dev/null -s -w {" + "time_total" + "} " + "%s/http/index.html" % client.IP()
+
     start_time = time()
     while True:
         # do the measurement (say) 3 times.
-        fetch_times.append(measure_fetch(client, server, net, command))
+        fetch_times.append(measure_fetch(server, command))
         # Calculate one average and sleep for five seconds
         sleep(5)
         now = time()
@@ -239,7 +241,7 @@ def bufferbloat():
     overall_average = helper.avg(fetch_times)
     overall_std = helper.stdev(fetch_times)
 
-    f = open("fetch_statistics.txt", "w+")
+    f = open("fetch_statistics.txt", "a")
     f.write("Average: %s \n" % overall_average)
     f.write("Standard deviation: %s \n" % overall_std)
     f.close()
