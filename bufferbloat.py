@@ -245,8 +245,8 @@ def bufferbloat():
     # Ensure that all processes you create within Mininet are killed.
     # Sometimes they require manual killing.
     Popen("pgrep -f webserver.py | xargs kill -9", shell=True).wait()
-    for proc in procs:
-        proc.join()
+    # for proc in procs:
+    #     proc.join()
 
 if __name__ == "__main__":
     bufferbloat()
