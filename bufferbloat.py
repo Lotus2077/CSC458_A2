@@ -214,7 +214,7 @@ def bufferbloat():
     fetch_times = []
     client = net.get("h1")
     server = net.get("h2")
-    command = "curl -o /dev/null -s -w %{time_total} %s/http/index.html" % (client.IP())
+    command = "curl -o /dev/null -s -w {} {}/http/index.html".format("%{time_total}", client.IP())
     start_time = time()
     while True:
         # do the measurement (say) 3 times.
