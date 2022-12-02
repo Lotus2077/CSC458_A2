@@ -188,14 +188,16 @@ def bufferbloat():
     # TODO: Start iperf, webservers, etc.
     # Create sepereate processes for the long-lived flow, ping train, and webserver downloads respectively so that
     # they will all be happening simultaneously
-    procs = []
-    proc_ping = Process(target=start_ping, args=(net,))
-    proc_iperf = Process(target=start_iperf, args=(net,))
-    procs.append(proc_iperf)
-    procs.append(proc_ping)
+    # procs = []
+    # proc_ping = Process(target=start_ping, args=(net,))
+    # proc_iperf = Process(target=start_iperf, args=(net,))
+    # procs.append(proc_iperf)
+    # procs.append(proc_ping)
 
-    proc_iperf.start()
-    proc_ping.start()
+    # proc_iperf.start()
+    # proc_ping.start()
+    start_iperf(net)
+    start_ping(net)
     start_webserver(net)
 
     # Hint: The command below invokes a CLI which you can use to
