@@ -192,14 +192,6 @@ def bufferbloat():
     # TODO: Start iperf, webservers, etc.
     # Create sepereate processes for the long-lived flow, ping train, and webserver downloads respectively so that
     # they will all be happening simultaneously
-    # procs = []
-    # proc_ping = Process(target=start_ping, args=(net,))
-    # proc_iperf = Process(target=start_iperf, args=(net,))
-    # procs.append(proc_iperf)
-    # procs.append(proc_ping)
-
-    # proc_iperf.start()
-    # proc_ping.start()
     start_iperf(net)
     start_ping(net)
     start_webserver(net)
@@ -221,12 +213,12 @@ def bufferbloat():
     client = net.get("h1")
     server = net.get("h2")
     # command = "curl -o /dev/null -s -w {} {}/http/index.html".format("%{time_total}", client.IP())
-    command = "curl -o /dev/null -s -w %{time_total} " + client.IP() + "/http/index.html"
+    quer = "curl -o /dev/null -s -w %{time_total} " + client.IP() + "/http/index.html"
 
     start_time = time()
     while True:
         # do the measurement (say) 3 times.
-        fetch_times.append(measure_fetch(server, command))
+        fetch_times.append(measure_fetch(server, quer))
         # Calculate one average and sleep for five seconds
         sleep(5)
         now = time()
