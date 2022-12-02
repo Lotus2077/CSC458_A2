@@ -239,7 +239,7 @@ def bufferbloat():
     overall_average = helper.avg(fetch_times)
     overall_std = helper.stdev(fetch_times)
 
-    f = open("fetch_statistics.txt", "w+")
+    f = open("fetch_statistics.txt", "a")
     f.write("Average: %s \n" % overall_average)
     f.write("Standard deviation: %s \n" % overall_std)
     f.close()
